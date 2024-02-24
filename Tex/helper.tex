@@ -1,0 +1,261 @@
+\begin{comment} %数据表写法
+\begin{table}
+    \bicaption{\quad 中文}{\quad english}% caption
+    \footnotesize% fontsize
+    \setlength{\tabcolsep}{4pt}% column separation
+    \renewcommand{\arraystretch}{1.5}% row space 
+    \centering
+    \begin{tabular}{lcc}
+        \hline
+        \hline
+        \hline
+    \end{tabular}
+    \label{tab:example}
+\end{table}
+\end{comment}
+
+\begin{comment} %有序列表写法
+\begin{enumerate}
+    \item 
+    \item 
+    ...
+\end{enumerate}
+\end{comment}
+
+\begin{comment} %无序列表写法
+\begin{itemize}
+    \item 
+    \item 
+    ...
+\end{itemize}
+\end{comment}
+
+\begin{comment} %公式书写及引用
+比如Navier-Stokes方程（方程~\eqref{eq:ns}）：
+\begin{equation} \label{eq:ns}
+    %\adddotsbeforeeqnnum%
+    \begin{cases}
+        \frac{\partial \rho}{\partial t} + \nabla\cdot(\rho\Vector{V}) = 0 \ \mathrm{times\ math\ test: 1,2,3,4,5}, 1,2,3,4,5\\
+        \frac{\partial (\rho\Vector{V})}{\partial t} + \nabla\cdot(\rho\Vector{V}\Vector{V}) = \nabla\cdot\Tensor{\sigma} \ \text{times text test: 1,2,3,4,5}\\
+        \frac{\partial (\rho E)}{\partial t} + \nabla\cdot(\rho E\Vector{V}) = \nabla\cdot(k\nabla T) + \nabla\cdot(\Tensor{\sigma}\cdot\Vector{V})
+    \end{cases}
+\end{equation}
+\begin{equation}
+    %\adddotsbeforeeqnnum%
+    \frac{\partial }{\partial t}\int\limits_{\Omega} u \, \mathrm{d}\Omega + \int\limits_{S} \unitVector{n}\cdot(u\Vector{V}) \, \mathrm{d}S = \dot{\phi}
+\end{equation}
+\[ %匿名公式（不计公式号？）
+    \begin{split}
+        \mathcal{L} \{f\}(s) &= \int _{0^{-}}^{\infty} f(t) e^{-st} \, \mathrm{d}t, \ 
+        \mathscr{L} \{f\}(s) = \int _{0^{-}}^{\infty} f(t) e^{-st} \, \mathrm{d}t\\
+        \mathcal{F} {\bigl (} f(x+x_{0}) {\bigr )} &= \mathcal{F} {\bigl (} f(x) {\bigr )} e^{2\pi i\xi x_{0}}, \ 
+        \mathscr{F} {\bigl (} f(x+x_{0}) {\bigr )} = \mathscr{F} {\bigl (} f(x) {\bigr )} e^{2\pi i\xi x_{0}}
+    \end{split}
+\]
+数学公式常用命令请见 \href{https://en.wikibooks.org/wiki/LaTeX/Mathematics}{WiKibook Mathematics}。artracom.sty中对一些常用数据类型如矢量矩阵等进行了封装，这样的好处是如有一天需要修改矢量的显示形式，只需单独修改artracom.sty中的矢量定义即可实现全文档的修改。
+\begin{axiom}
+   这是一个公理。 
+\end{axiom}
+\begin{theorem}
+   这是一个定理。 
+\end{theorem}
+\begin{lemma}
+   这是一个引理。 
+\end{lemma}
+\begin{corollary}
+   这是一个推论。 
+\end{corollary}
+\begin{assertion}
+   这是一个断言。 
+\end{assertion}
+\begin{proposition}
+   这是一个命题。 
+\end{proposition}
+\begin{definition}
+    这是一个定义。
+\end{definition}
+\begin{example}
+    这是一个例子。
+\end{example}
+\begin{remark}
+    这是一个注。
+\end{remark}
+\end{comment}
+
+
+
+\begin{comment} % 图与表
+论文中图片的插入通常分为单图和多图，下面分别加以介绍：
+
+单图插入：假设插入名为\verb|c06h06|（后缀可以为.jpg、.png和.pdf，下同）的图片，其效果如图~\ref{fig:c06h06}。
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.40\textwidth]{c06h06}
+    \bicaption{\quad 样图}{\quad Sample Figure}
+    \label{fig:c06h06}
+\end{figure}
+
+如果插图的空白区域过大，以图片\verb|c06h06|为例，自动裁剪如图~\ref{fig:c06h06_trim}。
+\begin{figure}[!htbp]
+    \centering
+    %trim option's parameter order: left bottom right top
+    \includegraphics[trim = 60mm 80mm 60mm 60mm, clip, width=0.80\textwidth]{c06h06}
+    \bicaption{\quad 自动裁切测试}{\quad Auto-Crop Test}
+    \label{fig:c06h06_trim}
+\end{figure}
+
+多图的插入如图~\ref{fig:oaspl}，多图不应在子图中给文本子标题，只要给序号，并在主标题中进行引用说明。
+\begin{figure}[!htbp]
+    \centering
+    \begin{subfigure}[b]{0.35\textwidth}
+      \includegraphics[width=\textwidth]{oaspl_a}
+      \caption{}
+      \label{fig:oaspl_a}
+    \end{subfigure}%
+    ~% add desired spacing
+    \begin{subfigure}[b]{0.35\textwidth}
+      \includegraphics[width=\textwidth]{oaspl_b}
+      \caption{}
+      \label{fig:oaspl_b}
+    \end{subfigure}
+    \\% line break
+    \begin{subfigure}[b]{0.35\textwidth}
+      \includegraphics[width=\textwidth]{oaspl_c}
+      \caption{}
+      \label{fig:oaspl_c}
+    \end{subfigure}%
+    ~% add desired spacing
+    \begin{subfigure}[b]{0.35\textwidth}
+      \includegraphics[width=\textwidth]{oaspl_d}
+      \caption{}
+      \label{fig:oaspl_d}
+    \end{subfigure}
+    \bicaption{\quad 多子图测试}{\quad A test for multi-subfig}
+    \label{fig:oaspl}
+\end{figure}
+
+\subsection{表}
+
+请见表~\ref{tab:sample}。
+\begin{table}[!htbp]
+    \bicaption{\quad 这是一个样表}{\quad This is a sample table}
+    \label{tab:sample}
+    \centering
+    \footnotesize% fontsize
+    \setlength{\tabcolsep}{4pt}% column separation
+    \renewcommand{\arraystretch}{1.2}%row space 
+    \begin{tabular}{lcccccccc}
+        \hline
+        行号 & \multicolumn{8}{c}{跨多列的标题}\\
+        %\cline{2-9}% partial hline from column i to column j
+        \hline
+        Row 1 & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$\\
+        Row 2 & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$\\
+        Row 3 & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$\\
+        Row 4 & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$\\
+        \hline
+    \end{tabular}
+\end{table}
+
+制图制表的更多范例，请见 \href{https://github.com/mohuangrui/ucasthesis/wiki}{ucasthesis 知识小站} 和 \href{https://en.wikibooks.org/wiki/LaTeX/Tables}{WiKibook Tables}。
+\end{comment}
+
+\begin{comment} % ------------- 参考文献
+参考文献引用过程以实例进行介绍，假设需要引用名为"Document Preparation System"的文献，步骤如下：
+
+1）将Bib格式的参考文献信息添加到ref.bib文件中（此文件位于Biblio文件夹下），如直接粘贴自网站，请注意修改其格式。
+
+2）索引第一行 \verb|@article{lamport1986document,|中 \verb|lamport1986document| 即为此文献的label (中文文献也必须使用英文label，一般遵照：姓氏拼音+年份+标题第一字拼音的格式)，想要在论文中索引此文献,\verb|\citep{lamport1986document}|。如此处所示 \citep{lamport1986document}。
+
+多文献索引用英文逗号隔开, 如此处所示 \citep{lamport1986document, chu2004tushu, chen2005zhulu}。
+
+更多例子如：
+
+Walls等\citep{walls2013drought}根据Betts\citep{betts2005aging} 的研究，首次提出......理论。其中关于......的研究\citep{walls2013drought, betts2005aging}，是当前中国得到迅速发展的研究领域 \citep{chen1980zhongguo, bravo1990comparative}。
+
+不同文献样式和引用样式，如著者-出版年制（authoryear）、顺序编码制（numbers）、上标顺序编码制（super）可在Thesis.tex中对artratex.sty调用实现，详见 \href{https://github.com/mohuangrui/ucasthesis/wiki}{ucasthesis 知识小站之文献样式}。
+
+%若在上标顺序编码制（super）模式下，希望在特定位置将上标改为嵌入式标，可使用 \citetns{niu2013zonghe,stamerjohanns2009mathml} 和 \citepns{niu2013zonghe,stamerjohanns2009mathml}。
+
+参考文献索引的更多知识，请见 \href{https://en.wikibooks.org/wiki/LaTeX/Bibliography_Management}{WiKibook Bibliography}。\nocite{*}% 使文献列表显示所有参考文献（包括未引用文献）
+\end{comment}
+
+\begin{comment} % ---------- QA
+设置文档样式: 在artratex.sty中搜索关键字定位相应命令，然后修改
+\begin{enumerate}
+    \item 正文行距：启用和设置 \verb|\linespread{1.25}|，默认1.25倍行距。
+    \item 参考文献行距：修改 \verb|\setlength{\bibsep}{0.0ex}|
+    \item 目录显示级数：修改 \verb|\setcounter{tocdepth}{2}|
+    \item 文档超链接的颜色及其显示：修改 \verb|\hypersetup|
+\end{enumerate}
+
+文档内字体切换方法：
+    \begin{itemize}
+        \item 宋体：国科大论文模板ucasthesis 或 \textrm{国科大论文模板ucasthesis}
+        \item 粗宋体：{\bfseries 国科大论文模板ucasthesis} 或 \textbf{国科大论文模板ucasthesis}
+        \item 黑体：{\sffamily 国科大论文模板ucasthesis} 或 \textsf{国科大论文模板ucasthesis}
+        \item 粗黑体：{\bfseries\sffamily 国科大论文模板ucasthesis} 或 \textsf{\bfseries 国科大论文模板ucasthesis}
+        \item 仿宋：{\ttfamily 国科大论文模板ucasthesis} 或 \texttt{国科大论文模板ucasthesis}
+        \item 粗仿宋：{\bfseries\ttfamily 国科大论文模板ucasthesis} 或 \texttt{\bfseries 国科大论文模板ucasthesis}
+        \item 楷体：{\itshape 国科大论文模板ucasthesis} 或 \textit{国科大论文模板ucasthesis}
+        \item 粗楷体：{\bfseries\itshape 国科大论文模板ucasthesis} 或 \textit{\bfseries 国科大论文模板ucasthesis}
+    \end{itemize}
+\end{comment}
+
+论文摘要包括中文摘要和英文摘要（Abstract）两部分。论文摘要应概括地反映出本论文的主要内容，说明本论文的主要研究目的、内容、方法、结论。要突出本论文的创造性成果或新见解，不宜使用公式、图表、表格或其他插图材料，不标注引用文献。中文摘要的字数由各学科群分会根据本分会涉及学科专业的特点提出具体要求。英文摘要与中文摘要内容应保持一致。留学生用其他语种撰写学位论文时，应有详细的中文摘要，字数由各学科群分会具体制定，建议一般不少于5000字。
+摘要最后注明本文的关键词（3～5个）。关键词是为了文献标引和检索工作，从论文中选取出来，用以表示全文主题内容信息的单词或术语。关键词以显著的字符另起一行并隔行排列于摘要下方，左顶格，中文关键词间用中文逗号隔开。英文关键词应与中文关键词对应，首字母应大写，用英文逗号隔开。
+
+摘要应另起一页，与正文前的内容连续编页（用罗马字符）。
+
+\begin{enumerate}
+    \item 绪论应包括选题的背景和意义，国内外相关研究成果与进展述评，本论文所要解决的科学与技术问题、所运用的主要理论和方法、基本思路和论文结构等。绪论应独立成章，用足够的文字叙述，不与摘要雷同。要实事求是，不夸大也不弱化前人的工作和自己的工作。
+    \item 论文主体是正文的核心部分，占主要篇幅，它是将学习和研究过程中调查、观察和测试所获得的材料和数据，经过思考判断、加工整理和分析研究，进而形成论点。依据学科专业及具体选题，论文主体可以有不同的表现形式，可以按照章与节的结构表述，也可以按照“研究背景与意义—研究方法与过程—研究结果与讨论”的表述形式组织论文。但主体内容必须实事求是，客观诚实，准确完备，合乎逻辑，层次分明，简明可读。
+    \item 研究结论是对整个论文主要成果的总结，不是正文中各章小结的简单重复，应准确、完整、明确、精炼。应明确凝练出本研究的主要创新点，对论文的学术价值和应用价值等加以分析和评价，说明本项研究的局限性或研究中尚难解决的问题，并提出今后进一步在本研究方向进行研究工作的设想或建议。结论部分应严格区分本人研究成果与他人科研成果的界限。
+\end{enumerate}
+\subsection{附录（若有）}
+主要列入正文内过分冗长的公式推导、供查读方便所需的辅助性数学工具或表格、数据图表、程序全文及说明、调查问卷、实验说明等。
+\subsection{致谢}
+对给予各类资助、指导和协助完成研究工作，以及提供各种对论文工作有利条件的单位及个人表示感谢。致谢应实事求是，切忌浮夸与庸俗之词。致谢末尾应具日期，日期与论文封面一致。
+\subsection{作者简历及攻读学位期间发表的学术论文与其他相关学术成果}
+作者简历应包括从大学起到申请学位时的个人学习工作经历。按学术论文发表的时间顺序，列出作者本人在攻读学位期间发表或已录用的学术论文清单（著录格式同参考文献）。其他相关学术成果可以是申请的专利、获得的奖项及完成的项目等代表本人学术成就的各类成果。
+论文可参考“绪论-研究背景与意义-研究方法与过程-研究结果与讨论-研究结论与展望”的结构形式撰写，各主体研究内容可分别单独成为章节并作为章节标题使用。
+
+\subsubsection{量和单位}
+量和单位要严格执行《国际单位制及其应用》（GB 3100-93）、《有关量、单位和符号的一般原则》（GB3101—93）有关量和单位的规定。量的符号一般为单个拉丁字母或希腊字母，并一律采用斜体（pH例外）。
+
+论文中若有图和表，应设置图表目录，先列图后列表，置于目录页后，另页编排。
+
+图片大小适当，图边界在页面范围内（图边界离页面边界距离大于页边距）。若图片中包含文字，文字大小不超过正文文字大小。
+图包括曲线图、构造图、示意图、框图、流程图、记录图、地图、照片等，宜插入正文适当位置。引用的图必须注明来源。具体要求如下
+\begin{itemize}
+    \item 图应具有“自明性”，即只看图、图题和图注，不阅读正文，就可理解图意。每一图应有简短确切的图题，连同图序置于图下居中。
+    \item 图中的符号标记、代码及实验条件等，可用最简练的文字横排于图框内或图框外的某一部位作为图注说明，全文统一。图题建议用中文及英文两种文字表达。
+    \item 照片图要求主要显示部分的轮廓鲜明，便于制版，如用放大、缩小的复制品，必须清晰，反差适中，照片上应有表示目的物尺寸的标尺。
+    \item 图片一般设为高6cm×宽8cm，但高、宽也可根据图片量及排版需要按比例缩放。中文（宋体）英文（Times New Roman）图注为五号字，1.25倍行距。
+    \item 文中尽量不用世界地图、全国地图！如果一定要用，凡涉国界图件（国内部分地区、全国、世界部分地区、全球）必须使用自然资源部标准地图底图（下载网址：http://bzdt.ch.mnr.gov.cn），所用底图边界要完全无修改（包括南海诸岛位置），为适应排版时图的缩放，比例尺一律用线段比例尺，而不用数字比例尺。并在图题下注明“注：该图基于自然资源部标准地图服务网站下载的审图号为GS(2021)××××号的标准地图制作，底图边界无修改。”
+\end{itemize}
+
+\textbf{(2) 表}
+
+表的编排一般是内容和测试项目由左至右横读，数据依序竖排，应有自明性，引用的表必须注明来源。具体要求如下：
+\begin{itemize}
+    \item 每一表应有简短确切的题名，连同表序置于表上居中。必要时，应将表中的符号、标记、代码及需说明的事项，以最简练的文字横排于表下作为表注。表题建议用中文及英文两种文字表达。
+    \item 表内同一栏数字必须上下对齐。表内不应用“同上”、“同左”等类似词及“″”符号，一律填入具体数字或文字，表内“空白”代表无此项，“—”或“…”（因“—”可能与代表阴性反应相混）代表未发现，“0”该表实测结果为零。表内未测出值可以用“N.D. ”表示。
+    \item 表格尽量用“三线表”，避免出现竖线，避免使用过大的表格，确有必要时可采用卧排表，正确方位应为“顶左底右”，即表顶朝左，表底朝右。表格太大需要转页时，需要在续表表头上方注明“续表”，表头也应重复排出。
+    \item 中文（宋体）英文（Times New Roman）表注为五号字，1.25倍行距。
+\end{itemize}
+\subsubsection{表达式}
+论文中的表达式需另行起，原则上应居中。若有两个以上的表达式，应从“1”开始的阿拉伯数字进行编号，并将编号置于括号内。编号采用右端对齐。表达式较多时可分章编号。
+较长的表达式如必须转行，只能在+，-，×，÷，＜，＞等运算符之后转行，序号编于最后一行右顶格。
+
+\subsection{参考文献}
+参考文献格式规范参照《信息与文献 参考文献著录规则》（GB/T 7714—2015），或可参照国际刊物通行的参考文献格式。各学科群分会可根据本学科的一般规范制定相应的参考文献格式。文后参考文献和参考文献在正文中的标注方式可采用“顺序编码制”或“著者—出版年制”。确定采用某种方法后，文后参考文献和参考文献在正文中的标注方式要对应。
+
+文后参考文献按“顺序编码制”组织时，各篇文献应按正文部分首次引用时标注的序号依次列出；文后参考文献按“著者—出版年制”组织时，条目不排序号，先按语种分类排列，语种顺序是：中文、日文、西文、俄文、其他文种；然后按著者字序和出版年排列。中文和日文按第一著者的姓氏笔画排序，中文也可按汉语拼音字母顺序排列，西文和俄文按第一著者姓氏字母顺序排列。当一个著者有多篇文献并为第一著者时，该著者单独署名的文献排在前面（并按出版年份的先后排列），接着排该著者与其他人合写的文献。
+文后参考文献加标题“参考文献”，并列入全文目录。
+凡正文里标注了参考文献的，其文献都必须列入文后参考文献。文后参考文献应集中著录于正文之后，不分章节著录。
+正文中未被引用但被阅读或具有补充信息的文献可集中列入附录中，其标题为“荐读书目”。
+详细内容请参考《中国科学院大学研究生学位论文撰写规范指导意见》。
+\subsection{纸张与页面要求}
+\subsection{书脊}
+学位论文的书脊用黑体，英文和阿拉伯数字用Times New Roman体，字号一般为小四号，可根据论文厚度适当调整。上方写论文题目，中间写作者姓名，下方写“中国科学院大学”，距上下边界均为3cm左右。

@@ -1,0 +1,65 @@
+%---------------------------------------------------------------------------%
+%->> Frontmatter
+%---------------------------------------------------------------------------%
+%-
+%-> 生成封面
+%-
+
+\maketitle% 生成中文封面
+\MAKETITLE% 生成英文封面
+%-
+%-> 作者声明
+%-
+\makedeclaration% 生成声明页
+%-
+%-> 中文摘要
+%-
+\intobmk\chapter*{摘\quad 要}% 显示在书签但不显示在目录
+\setcounter{page}{1}% 开始页码
+\pagenumbering{Roman}% 页码符号
+在过去的二十年里，随着通用处理器制程和工艺的演进,面对计算密集型负载，近存计算技术是一种用于缓解，整体流程分
+，其核心是。xx任务具有...，...，...的问题，目前的
+，其...有待提升。同时，由于
+，因此...对...有一定的要求。本文针对...提
+出了基于...的..，通过...等技术在
+...设备上进行高效的...，最终实现...且保证...
+...的...。本文的主要研究工作以及贡献如下：
+本文提出了一种基于...的...MetaPB。首先，
+得益于...并行度高的优点，...实现了在...上的
+...。其次，在架构设计时，本文基于...
+在保证...的同时实现具备...的...，并结合...
+...对模型进行改进。为了适应...任务场景，本文设计并实验了高效的
+，在 ...模块中使用了...，在...阶段基于...和...技术进行...预测。最终在保证模型效率的情况
+下，实现了一个具备较高..的算法模型。
+
+本文在模型和架构层面实现了对...算法的优化。对于模型层面，
+在整体框架设计时针对任务的特点引入结构，在模型内
+部使用...提高了...效率，最终提高了近存计算系统运行混合负载时的能耗与性能。
+为了适应不同...应用场景下对运行能效和性能的需求，在
+可接受的...损失条件下，本文使用...技术实现了具备
+...模型。在架构层面，本文探索了...技术在...任务场景中的应
+用，在不同...下实现了在 ...上的...加速。最终本文联合
+和架构的...优化，完成了对...的整体改进。
+本文通过上述的算法设计并实现了一个基于...的...
+，该模型具备较高的...，同时不同...的模型能够适应
+各类...场景。本文提出的...能够用于对...的..进行...，
+通过...、...、...和...四个流程，得到具备较
+高...的...。经过...个测试...的实验对比，本文提出的 MetaPB
+相比于粗粒度CPU-DPU调度在性能优先模式上... 能效模式上...平均获得了...
+
+
+\keywords{中国科学院大学，学位论文，模板}% 中文关键词
+%-
+%-> 英文摘要
+%-
+\intobmk\chapter*{Abstract}% 显示在书签但不显示在目录
+
+Chinese abstracts, English abstracts, table of contents, the main contents, references, appendix, acknowledgments, author's resume and academic papers published during the degree study and other relevant academic achievements must start with another right page (odd-numbered page).
+    %- the current style, comment all the lines in plain style definition.
+
+\KEYWORDS{University of Chinese Academy of Sciences, Thesis, LaTeX Template}% 英文关键词
+
+\pagestyle{enfrontmatterstyle}%
+\cleardoublepage\pagestyle{frontmatterstyle}%
+
+%---------------------------------------------------------------------------%
