@@ -72,7 +72,7 @@ export BSTINPUTS=".//:$BSTINPUTS" # paths to locate .bst
 #-
 #-> Build textual content and auxiliary files
 #-
-$TexCompiler -output-directory=$Tmp $FileName || exit
+$TexCompiler -output-directory=$Tmp $FileName -interaction=nonstopmode -no-shell-escape || exit
 #-
 #-> Build references and links
 #-
@@ -103,7 +103,7 @@ fi
 #-
 #-> Open the compiled file
 #-
-$PDFviewer ./$Tmp/"$FileName".pdf || exit
+#$PDFviewer ./$Tmp/"$FileName".pdf || exit
 echo "---------------------------------------------------------------------------"
 echo "$TexCompiler $BibCompiler "$FileName".tex finished..."
 echo "---------------------------------------------------------------------------"

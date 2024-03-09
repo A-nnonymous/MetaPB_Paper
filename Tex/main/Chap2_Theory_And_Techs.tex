@@ -1,9 +1,42 @@
 \chapter{相关理论与技术}\label{chap:Theory_And_Techs}
 
-\section{基于PIM-DIMM的近存计算技术}\label{chap:PNM_with_PIM_DIMM_intro}
+\section{基于DIMM的近存计算技术}\label{sec:PNM_DIMM_intro}
+    \subsection{体系结构特点}\label{subsec:arch_talent_intro}
+    基于DIMM的近存计算是一种旨在缓解处理器与内存间数据传输瓶颈的计算范式。该范式的体系结构特点可以从以下几个方面进行阐述：
 
-\section{基于表的负载调度算法}\label{sec:list_schedule_algorithm_intro}
+    \textbf{以数据为中心的设计理念}：该体系结构强调以数据中心的设计理念，即将计算任务尽可能地移至数据所在位置执行，以此减少数据移动带来的开销。这种设计理念有助于提升大数据处理和分析任务的效率。
+    
+    \textbf{内存与计算单元的紧密集成}：该体系结构的核心特点是将计算单元（如处理器核心或加速器）与内存阵列紧密集成在一起。这种设计可以减少数据在处理器和内存之间的移动，从而降低延迟并提高能效。
+    
+    \textbf{基于成熟的DIMM主存储技术}：该体系结构选择被广泛应用于普通计算机系统中的DIMM主存储技术作为基石，通过将计算能力下放至DIMM周围，并改变CPU与其之间的交互逻辑来实现近存计算，普遍对原有计算机体系结构的修改较小，有利于开发和实际部署。
+    
+    \subsection{UPMEM近存计算系统结构}\label{subsec:UPMEM_arch_intro}
+        \subsubsection{硬件体系结构}\label{subsubsec:UPMEM_hardware_arch}
+        图1-1是近存计算系统UPMEM的结构示意图，该系统是截至本文书写时（2023年10月）市面上唯一使用存内计算架构的商用计算系统，也是本文所有实验所基于的硬件系统。
+        
+        UPMEM在传统DIMM内存中的每一个64MB颗粒上都集成了一颗低功耗的、基于RISC-V架构的通用处理核心， 以及64KB的高速工作内存（Working Memory） 和24KB的指令内存（Instruction Memory）。该核心拥有14级流水线，其中有3级可同时完成，在实际计算中采用小任务块（tasklet）的实现方式来完成细粒度的计算划分，用于充分利用流水线的资源，其最优大小根据运行时计算队列的组成结构而定。对于该处理器的设计架构，一般来说大于11的tasklet数才能充分利用流水线[10]。
+        
+        UPMEM-PIM计算系统其实更类似于一个不需要考虑节点宕机（稳定性高）、通过主存储器通信（不涉及网络通信）、不用考虑拜占庭故障（可靠性高）的分布式计算系统\citep{chen_simplepim_2023}。频繁的PIM核间通信所带来的开销，会很大程度上抵消其架构在访存延迟和功耗上带来的优势。如果希望最大限度地发挥该架构的优势，则需要在算子层面尽可能地利用PIM处理器的并行性，避免核心间的频繁通信\citep{gomez-luna_benchmarking_2021}。因此，运行于PIM系统的程序在编写时往往需要与实际硬件结构紧密结合、审慎处理所有的数据传输操作。这给PIM系统的编程和调优带来了额外的复杂度\citep{chen_simplepim_2023}。
+        
+        一个典型的UPMEM PIM系统中包含20条8GB的PIM-DIMM，其中每一个PIM-DIMM包含128个低功耗DPU，整个系统共集成了2560个DPU，对应合计160GB大小的存内计算空间。它们与4条64GB的普通DDR4-DIMM内存各自共享两条内存通道。
 
-\section{基于元启发的参数优化算法}\label{sec:metaheuristic_based_args_optimization_intro}
+        \subsection{工具链与开发环境}\label{subsubsec:UPMEM_toolchain_arch}
+
+        \subsection{软件模型和编程接口}\label{subsubsec:UPMEM_software_model_and_interface}
+\section{异构计算系统调度技术概述}\label{sec:brief_intro_of_heterogenous_scheduling}
+    \subsection{基于表的负载调度算法}\label{subsec:list_schedule_algorithm_intro}
+    %HEFT like
+    \subsection{采用启发式学习的负载调度算法}\label{subsec:heuristic_based_scheduling_intro}
+    %HEFT-with-heuristics 
+    \subsection{单一负载多器件执行（SKMD）调度技术}\label{subsec:SKMD_intro}
+    %SKMD
+    \subsection{应用于PIM系统中的细粒度调度技术}\label{subsec:fine_grained_PIM_schedule_intro}
+    %LazyPIM, PEI
+
+\section{基于元启发的参数优化算法}\label{subsec:metaheuristic_based_args_optimization_intro}
+    \subsection{粒子群算法}\label{subsec:PSO_algorithm}
+    \subsection{算术优化算法}\label{subsec:AOA_algorithm}
+    \subsection{爬行生物优化算法}\label{subsec:RSA_algorithm}
 
 \section{本章小结}\label{sec:chap2_summary}
+本章首先对基于DIMM的近存计算体系结构的特点进行了简要的介绍，随后详细介绍了本文所基于的现实近存计算平台UPMEM的系统结构，包括硬件体系结构、工具链和软件模型及编程接口。接着，结合~\ref{subsec:existed_problems}节所提到的现有问题与UPMEM平台的特性，介绍了类似的异构计算系统调度技术，包括基于表的负载调度算法、采用启发式学习的负载调度算法、单一负载多器件执行技术以及专门应用与PIM系统中的一些细粒度调度技术。最后对本课题中被复现并使用的元启发参数优化算法（见~\ref{sec:metaheuristic_optimizer_facing_SKMD_regression_model}节）进行了介绍。

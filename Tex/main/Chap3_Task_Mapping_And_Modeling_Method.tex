@@ -1,0 +1,20 @@
+\chapter{CPU-PIM协同计算框架设计与实现}\label{chap:Task_Mapping_And_Modeling_Method} 
+    在[23]所作出的工作中，成功地将多个近存计算负载中共有的近存计算算子提炼成7个扩展的指令，集成进CPU原有指令集中，从而完成了CPU-PIM的协同运算。这在一定程度上，为低耦合高内聚的PIM基础算子库的设计提供了理论基础。
+\section{基于SKMD的负载执行基本流程}\label{sec:SKMD_based_task_execution_procedure}
+
+
+\section{现实DIMM近存计算系统中的SKMD负载建模}\label{sec:DIMM-PNM_sys_SKMD_task_modeling}
+  \subsection{现有负载执行流程}\label{subsec:DIMM-PNM_sys_task_execution_procedure}
+  \subsection{常见性能瓶颈的归纳}\label{sec:normal_bound_of_UPMEM}
+  \subsection{混合负载类建模}\label{subsubsec:load_abstraction}
+  目前常用的算子在设计、优化和最终封装时往往针对的只是单一硬件后端，这就导致了：1. 算子作为负载的抽象，在设计时却并未考虑到多个异构计算器件的协同工作，转而只能使其依赖于上层逻辑中对异构设备中同一算子的分配和调用，这就在上层逻辑中增加了在算子调用、负载分配上的复杂度。2.为了达到多器件协同，需要手动管理任务分配的比例以及器件间的同步，这与算子的设计初衷相违背。3. 涉及到多个复杂算子时，通过手动管理负载分配来充分发挥异构执行单元各自的优势，获得最优的性能十分困难。众多因素阻碍了在算子层面上异构计算器件的协同，从而导致了负载运行时异构器件的闲等和低利用率。
+    
+    因此，本课题提出了一种可细分、同时可用于PIM和CPU的异构负载类设计。相似的设计如PEI[23]中，作者将近存计算算子与CPU指令一一对应并用硬件根据局部性决定指令派发，而在SKMD[43]中，作者使用OpenCL书写算子并分别编译CPU和GPU程序。考虑到UPMEM系统尚未存在对OpenCL的支持、且修改CPU硬件结构是不可行的，本课题借鉴两种设计中的长处，并针对本课题所基于的现实近存计算系统，设计了一种适用于CPU与PIM协同计算的、可按照指定比例进行任务划分的负载类，能够在不修改原有算子书写模式的同时，便于CPU-PIM协同计算时的任务分配与任务间调度，进一步提升运行效率。
+
+  \subsection{基于负载建模的工具链重构}\label{subsubsec:toolchain_refractor}
+    
+\section{计算图执行逻辑设计与实现}\label{subsec:task_split_strategy_impl}
+    \subsection{基于HEFT的算子间调度逻辑}\label{subsec:HEFT_based_scheduling_logic_impl}
+    \subsection{算子间传输逻辑}\label{subsec:overall_logic_impl}
+    \subsection{算子内计算逻辑}\label{subsec:overall_logic_impl}
+\section{本章小结}\label{sec:chap3_summary}
